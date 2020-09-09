@@ -98,35 +98,35 @@ ATTTAGCTACAACGCTGTTTACGCTAGGAAGTCCTGCTCGGGTGTTGCAGTTCAGGGATA
 AGACCCAAGAAGTGTAGGGCCCTAAATTCATGTTGGGAAGTAGTCGTAATGCCACCTGAA
 TCAGCTTAGTATTCGCG
 '''
-text=text.replace('\n','')
-listed=text.split('>')
-listed.pop(0)
-print(len(listed))
+text=text.replace('\n','') #strips \n characters from given string
+listed=text.split('>') #splits string into a list with delimiter '>'; each list element is the string ID immediately followed by the string
+listed.pop(0) #removes the first element (empty string) from the list
+print(len(listed)) #prints the length of the list (number of DNA strings)
 
-i=0
-j=13
-gccount=0
-totalcount=0
-percent=0.0
-id=''
+i=0 #element counter
+j=13 #character counter
+gccount=0 #total guanine and cytosine in the given DNA element
+totalcount=0 #length of the DNA element
+percent=0.0 #percent guanine and cytosine in the given DNA element
+id='' #id of the DNA element with the largest percentage
 
-while i<len(listed):
+while i<len(listed): #iterates through list
 	element=listed[i]
-	while j<len(element):
-		totalcount+=1
-		if element[j]=="C" or element[j]=="G":
+	while j<len(element): #iterates through characters in element, skipping the id
+		totalcount+=1 #counts characters in DNA string
+		if element[j]=="C" or element[j]=="G": #counts cytosine and guanine in DNA string
 			gccount+=1
 		j+=1
-	print(element[0:13])
-	print(float(gccount)/totalcount)
-	if float(gccount)/totalcount>percent:
-		id=element[0:13]
-		percent=float(gccount)/totalcount
-		print(totalcount,gccount)
-	j=13
-	totalcount=0
-	gccount=0
+	print(element[0:13]) #prints id of current element
+	print(float(gccount)/totalcount) #prints percentage
+	if float(gccount)/totalcount>percent: #replaces old percentage with percentage of current element if the current element percentage is greater than the old largest percentage
+		id=element[0:13] #replaces old id with id of new element with largest percentage
+		percent=float(gccount)/totalcount #replaces old percentage with new percentage
+		print(totalcount,gccount) #prints number of characters in DNA string followed by number of cytosine and guanine in DNA string
+	j=13 #resets character counter to begin after the id of the next element
+	totalcount=0 #resets totalcount
+	gccount=0 #resets gccount
 	i+=1
 
-print(id)
-print(percent)
+print(id) #prints id of string with largest gc percentage
+print(percent) #prints largest gc percentage
